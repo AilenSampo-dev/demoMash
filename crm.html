@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mash — Canales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mash-ui.css">
+</head>
+<body class="page-canales">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="crm.html">
+      <span class="logo-script">Familia</span>
+      <span class="logo-main">MASH</span>
+      <span class="logo-panel">Canales</span>
+    </a>
+    <div class="topbar-right">
+      <a class="link-nav" href="erp.html">Ver ERP →</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="page-intro">
+    <h1>WhatsApp e Instagram</h1>
+    <p>Elegí un cliente. Cuando escribe, el sistema reconoce su número y muestra la ficha.</p>
+  </div>
+
+  <div class="pick-row">
+    <button type="button" class="pick-btn" data-start="wa">
+      <strong>Lucía Morales</strong>
+      <span>WhatsApp · Reishi · ya compró antes</span>
+    </button>
+    <button type="button" class="pick-btn" data-start="ig">
+      <strong>Marina Fonseca</strong>
+      <span>Instagram · Melena · recompra mensual</span>
+    </button>
+  </div>
+
+  <div class="crm-split">
+    <div>
+      <div class="ch-tabs">
+        <button type="button" class="ch-tab active" data-ch="wa">WhatsApp</button>
+        <button type="button" class="ch-tab" data-ch="ig">Instagram</button>
+      </div>
+      <div class="chat">
+        <div class="chat-msgs" id="chat-msgs" aria-live="polite"></div>
+        <div class="chat-foot">
+          <button type="button" class="btn btn-sm" id="chat-next">Siguiente</button>
+          <button type="button" class="btn btn-sm" id="chat-erp" disabled>Confirmar venta</button>
+          <button type="button" class="btn btn-sm ghost" id="chat-reset">Reiniciar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ficha empty" id="ficha-panel">
+      <p class="ficha-placeholder">Acá aparece la ficha cuando el sistema reconoce al cliente.</p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="log" id="log" style="display:none"></div>
+
+<script src="mash-core.js"></script>
+<script src="crm-ui.js"></script>
+</body>
+</html>

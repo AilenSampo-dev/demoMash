@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mash — ERP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mash-ui.css">
+</head>
+<body class="page-erp">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="crm.html">
+      <span class="logo-script">Familia</span>
+      <span class="logo-main">MASH</span>
+      <span class="logo-panel">ERP</span>
+    </a>
+    <div class="topbar-right">
+      <a class="link-nav" href="crm.html">← Canales</a>
+      <div class="sim-bar">
+        <span class="mono" id="today">—</span>
+        <button class="btn btn-sm" id="d7" type="button">+7 días</button>
+        <button class="btn btn-sm" id="reset" type="button">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="page-intro">
+    <h1>Tu negocio en un lugar</h1>
+    <p>Ventas, clientes y stock. Sincronizado con Canales.</p>
+  </div>
+
+  <section id="ventas">
+    <h2>Ventas</h2>
+    <div class="panel">
+      <div class="sale-row">
+        <div><label for="sale-client">Cliente</label><select id="sale-client"></select></div>
+        <div><label for="sale-product">Producto</label><select id="sale-product"></select></div>
+        <div><label for="sale-cant">Cant.</label><select id="sale-cant"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div><label for="sale-para">Para</label><select id="sale-para"><option value="propio">Propio</option><option value="reserva">Reserva</option></select></div>
+        <button class="btn" id="sale-submit" type="button">Registrar</button>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Fecha</th><th>Cliente</th><th>Producto</th><th class="r">Cant.</th><th class="hide-sm">Recordatorio</th></tr></thead>
+          <tbody id="ventas-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="clientes">
+    <h2>Clientes</h2>
+    <div class="panel">
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Cliente</th><th class="hide-sm">WhatsApp</th><th>Qué toma</th><th class="r">Última venta</th></tr></thead>
+          <tbody id="clientes-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="stock">
+    <h2>Stock</h2>
+    <div class="grid-stock" id="productos"></div>
+  </section>
+
+  <details class="more">
+    <summary>Planificación y recordatorios (opcional en la demo)</summary>
+    <div class="more-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+        <div><strong style="color:var(--black)">Pedidos esperados</strong><div id="demanda"></div></div>
+        <div><strong style="color:var(--black)">Recordatorios hoy</strong><div id="cola"></div></div>
+      </div>
+      <div class="log" id="log"></div>
+    </div>
+  </details>
+
+  <div id="lotes" style="display:none"></div>
+  <div id="kpis" style="display:none"></div>
+  <button id="d1" type="button" style="display:none"></button>
+  <button id="t10" type="button" style="display:none"></button>
+  <span id="qcount" style="display:none"></span>
+</div>
+
+<script src="mash-core.js"></script>
+<script src="erp-ui.js"></script>
+</body>
+</html>
