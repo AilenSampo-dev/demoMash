@@ -12,18 +12,18 @@
       {t:'sys', who:'', text:''}
     ],
     ig: [
-      {t:'in', who:'Marina', text:'Hola! ¿Me preparás otro Melena como el mes pasado? Mi WA es 351 555-0142'},
+      {t:'in', who:'Sofía', text:'Hola! Vi el Reel del Cordyceps. ¿Lo tienen? Mi WA es 351 555-0288'},
       {t:'sys', who:'', text:''},
-      {t:'out', who:'Mash', text:'¡Hola Marina! ¿Mismo gotero para foco?'},
-      {t:'in', who:'Marina', text:'Sí, 3 gotas a la mañana. Confirmo.'},
-      {t:'humano', who:'Joaquín', text:'Listo, te lo armo con recordatorio al día 25.'},
+      {t:'out', who:'Mash', text:'¡Hola Sofía! Sí, tenemos Cordyceps para energía. ¿Es tu primera compra con nosotros?'},
+      {t:'in', who:'Sofía', text:'Sí, quiero uno. Retiro hoy y pago en efectivo.'},
+      {t:'humano', who:'Joaquín', text:'Te lo aparto. Al confirmar la venta queda cargada en el ERP con recordatorio al día 25.'},
       {t:'sys', who:'', text:''}
     ]
   };
 
   const CHAT_DEMO = {
-    wa: {tel:'+54 351 555-0199', nom:'Lucía Morales', z:'Güemes · Córdoba', prod:'reishi', cant:1, para:'propio'},
-    ig: {tel:'+54 351 555-0142', nom:'Marina Fonseca', z:'Alberdi · Córdoba', prod:'melena', cant:1, para:'propio'}
+    wa: {tel:'+54 351 555-0199', nom:'Lucía Morales', z:'Güemes · Córdoba', prod:'reishi', cant:1, para:'propio', nuevo:false},
+    ig: {tel:'+54 351 555-0288', nom:'Sofía Ríos', z:'Centro · Córdoba', prod:'cordyceps', cant:1, para:'propio', nuevo:true}
   };
 
   let chatCanal = 'wa', chatIdx = 0, chatRegistrado = false;
@@ -41,6 +41,22 @@
     t.classList.add('show');
     clearTimeout(showToast._tm);
     showToast._tm = setTimeout(() => t.classList.remove('show'), 7000);
+  }
+
+  function renderFichaPanel(){
+    const panel = document.getElementById('ficha-panel');
+    const demo = CHAT_DEMO[chatCanal];
+    const c = chatIdx >= 2 ? M.findByTel(demo.tel) : null;
+    if (c) return renderFicha(c);
+    if (chatIdx >= 2 && demo.nuevo){
+      panel.className = 'ficha empty';
+      panel.innerHTML = '<p class="ficha-placeholder"><strong>Contacto nuevo</strong><br>'
+        + demo.nom+' · '+demo.tel+' · '+demo.z
+        + '<br><span style="display:block;margin-top:8px">No está en el sistema todavía. Confirmá la venta para crearlo en el ERP.</span></p>';
+      return;
+    }
+    panel.className = 'ficha empty';
+    panel.innerHTML = '<p class="ficha-placeholder">Acá aparece la ficha cuando el sistema reconoce al cliente.</p>';
   }
 
   function renderFicha(c){
@@ -88,7 +104,7 @@
     const erpBtn = document.getElementById('chat-erp');
     erpBtn.disabled = chatIdx < FLUJOS[chatCanal].length || chatRegistrado;
     erpBtn.textContent = chatRegistrado ? '✓ Registrado' : 'Confirmar venta';
-    renderFicha(chatIdx >= 2 ? M.findByTel(CHAT_DEMO[chatCanal].tel) : null);
+    renderFichaPanel();
   }
 
   function resetChat(){

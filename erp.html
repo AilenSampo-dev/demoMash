@@ -57,12 +57,33 @@
   <section id="clientes">
     <h2>Clientes</h2>
     <div class="panel">
+      <div class="client-row">
+        <div><label for="cli-nom">Nombre</label><input id="cli-nom" type="text" placeholder="Lucía Morales" autocomplete="name"></div>
+        <div><label for="cli-tel">WhatsApp</label><input id="cli-tel" type="tel" placeholder="+54 351 555-0199" autocomplete="tel"></div>
+        <div><label for="cli-z">Zona</label><input id="cli-z" type="text" placeholder="Güemes · Córdoba"></div>
+        <button class="btn" id="cli-submit" type="button">Agregar</button>
+      </div>
+      <p id="clientes-hint" class="empty" style="display:none;margin-bottom:12px">Sin clientes todavía. Agregá uno arriba o cargá la demo con historial.</p>
       <div class="table-scroll">
         <table>
           <thead><tr><th>Cliente</th><th class="hide-sm">WhatsApp</th><th>Qué toma</th><th class="r">Última venta</th></tr></thead>
           <tbody id="clientes-table"></tbody>
         </table>
       </div>
+      <button class="btn btn-sm ghost" id="load-demo" type="button" style="margin-top:12px">Cargar Lucía y Marina (demo)</button>
+    </div>
+  </section>
+
+  <section id="recordatorios">
+    <h2>Recordatorios</h2>
+    <div class="panel">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:14px">Al día 25 del ciclo, a las 10:00, el sistema avisa por WhatsApp. Usá <strong>+7 días</strong> para acercarte a esa fecha y <strong>Enviar 10:00</strong> para simular.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
+        <button class="btn btn-sm" id="t10" type="button" disabled>Enviar 10:00</button>
+        <span class="mono" id="qcount" style="font-size:13px;color:var(--muted)">—</span>
+      </div>
+      <div id="cola"></div>
+      <div class="log" id="log" style="margin-top:16px"></div>
     </div>
   </section>
 
@@ -72,21 +93,15 @@
   </section>
 
   <details class="more">
-    <summary>Planificación y recordatorios (opcional en la demo)</summary>
+    <summary>Planificación (opcional)</summary>
     <div class="more-body">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
-        <div><strong style="color:var(--black)">Pedidos esperados</strong><div id="demanda"></div></div>
-        <div><strong style="color:var(--black)">Recordatorios hoy</strong><div id="cola"></div></div>
-      </div>
-      <div class="log" id="log"></div>
+      <div id="demanda" style="margin-top:12px"></div>
     </div>
   </details>
 
   <div id="lotes" style="display:none"></div>
   <div id="kpis" style="display:none"></div>
   <button id="d1" type="button" style="display:none"></button>
-  <button id="t10" type="button" style="display:none"></button>
-  <span id="qcount" style="display:none"></span>
 </div>
 
 <script src="mash-core.js"></script>

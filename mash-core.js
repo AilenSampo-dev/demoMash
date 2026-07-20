@@ -296,6 +296,22 @@ const Mash = (function(){
 
   function clientesDe(id){ return CLIENTES.filter(c => lineasDe(c).some(l => l.prod === id)); }
 
+  function ensureSeed(){
+    if (CLIENTES.length) return null;
+    return applySeed(SEED);
+  }
+
+  function loadDemoSeed(){
+    const seedLog = applySeed(SEED);
+    const logEl = document.getElementById('log');
+    if (logEl){
+      logEl.innerHTML = '';
+      (seedLog || []).forEach(line => { const d = document.createElement('div'); d.innerHTML = line; logEl.appendChild(d); });
+    }
+    saveState();
+    return true;
+  }
+
   function resetAll(useSeed){
     offset = 0; ventasMes = 0; ventas.length = 0;
     ventasBuscar = ''; ventasSoloHoy = false;
@@ -315,16 +331,20 @@ const Mash = (function(){
   }
 
   function init(){
-    const logHtml = loadState();
-    if (!CLIENTES.length){
-      const seedLog = applySeed(SEED);
-      const logEl = document.getElementById('log');
-      if (logEl){
-        logEl.innerHTML = '';
-        seedLog.forEach(line => { const d = document.createElement('div'); d.innerHTML = line; logEl.appendChild(d); });
-      }
-    } else if (logHtml && typeof logHtml === 'string' && document.getElementById('log')){
-      document.getElementById('log').innerHTML = logHtml;
+    loadState();
+    const seedLog = ensureSeed();
+    const logEl = document.getElementById('log');
+    if (seedLog && logEl){
+      logEl.innerHTML = '';
+      seedLog.forEach(line => { const d = document.createElement('div'); d.innerHTML = line; logEl.appendChild(d); });
+    } else if (!seedLog && logEl && !logEl.innerHTML){
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw){
+          const s = JSON.parse(raw);
+          if (s.logHtml) logEl.innerHTML = s.logHtml;
+        }
+      } catch (e) { /* ignore */ }
     }
     saveState();
   }
@@ -342,6 +362,6 @@ const Mash = (function(){
     P, lineasDe, quedanLinea, lineaKey, findByTel, fichaResumen, fichaSysText, historialCliente,
     fecha, fmt, dd, calcProducto, crearCliente, registrarVenta, log, avanzar,
     dispararRecordatorios, pendientesHoy, esRecordatorioHoy, ultimaVenta, proxAvisoLinea,
-    tagLinea, fmtRecordatorios, clientesDe, resetAll, init, saveState
+    tagLinea, fmtRecordatorios, clientesDe, resetAll, init, saveState, loadDemoSeed
   };
 })();

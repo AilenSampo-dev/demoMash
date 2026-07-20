@@ -10,7 +10,7 @@
     const sel = document.getElementById('sale-client');
     const submit = document.getElementById('sale-submit');
     if (!M.CLIENTES.length){
-      sel.innerHTML = '<option value="" disabled selected>Sin clientes</option>';
+      sel.innerHTML = '<option value="" disabled selected>Sin clientes — agregá uno abajo</option>';
       submit.disabled = true;
     } else {
       sel.innerHTML = '<option value="" disabled selected>Elegir…</option>'
@@ -35,6 +35,10 @@
   }
 
   function renderClientesTable(){
+    const hint = document.getElementById('clientes-hint');
+    const loadDemo = document.getElementById('load-demo');
+    if (hint) hint.style.display = M.CLIENTES.length ? 'none' : 'block';
+    if (loadDemo) loadDemo.style.display = M.CLIENTES.length ? 'none' : 'inline-block';
     if (!M.CLIENTES.length){
       document.getElementById('clientes-table').innerHTML =
         '<tr><td colspan="4"><div class="empty">Sin clientes.</div></td></tr>';
@@ -74,11 +78,41 @@
     }).join('');
 
     const colaEl = document.getElementById('cola');
+    const items = M.pendientesHoy();
+    const activos = items.filter(({k}) => !M.vetados.has(k));
+    const t10 = document.getElementById('t10');
+    const qcount = document.getElementById('qcount');
+    if (t10){
+      t10.disabled = activos.length === 0;
+      t10.textContent = activos.length ? 'Enviar 10:00 · '+activos.length : 'Enviar 10:00';
+    }
+    if (qcount){
+      qcount.textContent = activos.length
+        ? activos.length+' recordatorio'+(activos.length>1?'s':'')+' pendiente'+(activos.length>1?'s':'')+' hoy'
+        : 'Nadie llega al día 25 hoy';
+    }
     if (colaEl){
-      const items = M.pendientesHoy().filter(({k}) => !M.vetados.has(k));
       colaEl.innerHTML = items.length
-        ? items.map(({c,l}) => '<div class="q">'+c.n+' · '+M.P(l.prod).nom+'</div>').join('')
-        : '<div class="empty">Nadie hoy</div>';
+        ? items.map(({c,l,k}) => {
+            const v = M.vetados.has(k);
+            return '<div class="q'+(v?' cancel':'')+'" style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)">'
+              + '<span style="flex:1;font-size:14px"><strong>'+c.n+'</strong> · '+M.P(l.prod).nom+'<br><small style="color:var(--muted)">le quedan 5 días de gotero</small></span>'
+              + (v
+                ? '<button type="button" class="btn btn-sm ghost" data-un="'+k+'">Reactivar</button>'
+                : '<button type="button" class="btn btn-sm ghost" data-v="'+k+'">Frenar</button>')
+              + '</div>';
+          }).join('')
+        : '<div class="empty">Nadie en cola. Avanzá días con +7 hasta que alguien llegue al día 25.</div>';
+      colaEl.querySelectorAll('[data-v]').forEach(b => b.onclick = () => {
+        M.vetados.add(b.dataset.v);
+        M.log('<s>Frenado</s> · recordatorio pausado');
+        render();
+      });
+      colaEl.querySelectorAll('[data-un]').forEach(b => b.onclick = () => {
+        M.vetados.delete(b.dataset.un);
+        M.log('Reactivado · vuelve a la cola');
+        render();
+      });
     }
 
     const demandaEl = document.getElementById('demanda');
@@ -103,10 +137,29 @@
     render();
   };
 
+  document.getElementById('cli-submit').onclick = () => {
+    const ok = M.crearCliente(
+      document.getElementById('cli-nom').value,
+      document.getElementById('cli-tel').value,
+      document.getElementById('cli-z').value
+    );
+    if (ok){
+      document.getElementById('cli-nom').value = '';
+      document.getElementById('cli-tel').value = '';
+      document.getElementById('cli-z').value = '';
+      render();
+    }
+  };
+
+  const loadDemo = document.getElementById('load-demo');
+  if (loadDemo) loadDemo.onclick = () => { M.loadDemoSeed(); render(); };
+
   const d7 = document.getElementById('d7');
   if (d7) d7.onclick = () => { M.avanzar(7); render(); };
   const d1 = document.getElementById('d1');
   if (d1) d1.onclick = () => { M.avanzar(1); render(); };
+  const t10 = document.getElementById('t10');
+  if (t10) t10.onclick = () => { M.dispararRecordatorios(); render(); };
   const reset = document.getElementById('reset');
   if (reset) reset.onclick = () => { M.resetAll(true); render(); };
 
