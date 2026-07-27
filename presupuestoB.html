@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta — Mash · Ailén Sampó</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#F27830;
+  --orange-deep:#D9651A;
+  --black:#1A1A1A;
+  --white:#FFFFFF;
+  --cream:#FFF8F0;
+  --ok:#2A7D4F;
+  --urgent:#C0392B;
+  --pending:#B8860B;
+  --muted:rgba(26,26,26,.55);
+  --line:rgba(26,26,26,.12);
+  --line-strong:rgba(26,26,26,.28);
+  --card-shadow:4px 4px 0 var(--black);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--orange);
+  color:var(--white);
+  font-family:'DM Sans',sans-serif;
+  font-weight:400;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:radial-gradient(circle,rgba(26,26,26,.14) 1.2px,transparent 1.2px);
+  background-size:5px 5px;
+  pointer-events:none;
+  opacity:.35;
+  z-index:0;
+}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px 100px;position:relative;z-index:1}
+.eyebrow{font-family:'DM Sans';font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.22em;color:var(--white);opacity:.72}
+.mono{font-family:'DM Mono',monospace;font-variant-numeric:tabular-nums}
+
+/* HERO */
+.hero{padding:72px 0 52px}
+.hero h1{font-family:'Archivo Black';font-size:46px;font-weight:400;letter-spacing:-.02em;line-height:1.04;margin:16px 0 20px;max-width:18ch;color:var(--white)}
+.hero h1 em{font-style:normal;font-family:'Pacifico',cursive;font-size:.8em;color:var(--cream);letter-spacing:0}
+.hero .lead{font-size:17px;opacity:.82;max-width:58ch}
+.meta{display:flex;gap:28px;margin-top:32px;flex-wrap:wrap;font-size:12px;color:rgba(255,255,255,.55)}
+.meta b{display:block;color:var(--white);font-weight:400;font-size:14px;margin-top:2px;font-family:'DM Mono',monospace}
+
+section{padding:52px 0;border-top:3px solid rgba(26,26,26,.25)}
+h2{font-family:'Archivo Black';font-size:28px;font-weight:400;letter-spacing:-.02em;margin:8px 0 16px;color:var(--white)}
+h3{font-family:'Archivo Black';font-size:18px;font-weight:400;letter-spacing:-.01em;color:var(--black)}
+p{margin-bottom:12px;max-width:64ch}
+p.dim{color:rgba(255,255,255,.72);font-size:14px}
+strong{font-weight:600}
+
+/* CARDS */
+.card{background:var(--white);color:var(--black);border:3px solid var(--black);border-radius:12px;padding:24px;box-shadow:var(--card-shadow)}
+.card-cream{background:var(--cream)}
+
+/* ETAPAS */
+.etapa{margin-bottom:16px}
+.etapa-header{display:flex;align-items:stretch;gap:0;border:3px solid var(--black);border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow)}
+.etapa-num{background:var(--black);color:var(--orange);font-family:'Archivo Black';font-size:28px;padding:20px 22px;display:flex;align-items:center;justify-content:center;min-width:72px;letter-spacing:-.02em}
+.etapa-body{background:var(--white);color:var(--black);padding:20px 22px;flex:1}
+.etapa-body h3{margin-bottom:4px}
+.etapa-body .sub{font-size:13px;color:var(--muted);margin-bottom:12px}
+.etapa-price{font-family:'DM Mono';font-size:22px;font-weight:500;color:var(--black);margin-top:8px}
+.etapa-price small{font-size:12px;color:var(--muted);font-family:'DM Sans';font-weight:400;margin-left:6px}
+
+.req{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;background:var(--cream);border:2px solid var(--black);color:var(--black);padding:4px 10px;border-radius:6px;margin-bottom:10px}
+
+.feature-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px}
+.feature-list li{display:flex;gap:10px;font-size:14px;color:var(--black);padding:6px 0;border-bottom:1px dotted var(--line)}
+.feature-list li:last-child{border-bottom:0}
+.feature-list .dot{width:8px;height:8px;border-radius:999px;background:var(--orange);border:2px solid var(--black);flex:none;margin-top:6px}
+
+/* OPCIONES A/B */
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.opt{background:var(--white);border:3px solid var(--black);border-radius:12px;padding:20px;box-shadow:var(--card-shadow)}
+.opt.rec{border-color:var(--ok);box-shadow:4px 4px 0 var(--ok)}
+.opt-badge{display:inline-block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;padding:4px 10px;border-radius:999px;border:2px solid var(--black);margin-bottom:10px}
+.badge-a{background:var(--cream);color:var(--black)}
+.badge-rec{background:var(--ok);color:var(--white);border-color:var(--ok)}
+.opt h3{font-size:16px;margin-bottom:6px}
+.opt .opt-price{font-family:'DM Mono';font-size:20px;font-weight:500;margin-top:10px;color:var(--black)}
+.pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.pros p,.cons p{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.pros p{color:var(--ok)}
+.cons p{color:var(--urgent)}
+.pros ul,.cons ul{list-style:none;padding:0;font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+
+/* DEPENDENCIAS */
+.dep-chain{display:flex;align-items:center;gap:0;flex-wrap:wrap;margin:16px 0}
+.dep-step{background:var(--black);color:var(--orange);font-family:'DM Mono';font-size:12px;padding:6px 14px;border-radius:6px;font-weight:500}
+.dep-arrow{color:var(--white);font-size:18px;opacity:.55;padding:0 6px}
+.dep-step.active{background:var(--orange);color:var(--black)}
+
+/* TABLA TOTALES */
+.total-table{background:var(--white);border:3px solid var(--black);border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow);margin-top:20px}
+.total-table .row{display:flex;justify-content:space-between;align-items:center;padding:13px 20px;border-bottom:1px solid var(--line);font-size:15px;color:var(--black)}
+.total-table .row:last-child{border-bottom:0}
+.total-table .row.sub{padding:10px 20px 10px 36px;background:var(--cream)}
+.total-table .row.sub span:first-child{font-size:13px;color:var(--muted)}
+.total-table .row.sub .mono{font-size:13px}
+.total-table .row.highlight{background:var(--orange);color:var(--white)}
+.total-table .row.highlight .mono{color:var(--white)}
+.total-table .row.big{padding:20px;background:var(--black);color:var(--white)}
+.total-table .row.big span:first-child{font-family:'Archivo Black';font-size:18px}
+.total-table .row.big .mono{font-family:'DM Mono';font-size:34px;color:var(--orange)}
+.total-table .row.saving{background:#E8F5EE;border-left:4px solid var(--ok)}
+.total-table .row.saving span{color:var(--ok);font-weight:600;font-size:14px}
+
+/* PACKS */
+.packs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.pack{background:var(--white);color:var(--black);border:3px solid var(--black);border-radius:12px;padding:22px;box-shadow:var(--card-shadow)}
+.pack.rec{border-color:var(--ok);box-shadow:4px 4px 0 var(--ok)}
+.pack-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;margin-bottom:10px}
+.pack h3{font-family:'Archivo Black';font-size:20px;font-weight:400;margin-bottom:12px}
+.pack .items{list-style:none;padding:0;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
+.pack .items li::before{content:'↳ ';color:var(--orange);font-weight:600}
+.pack .pack-total{border-top:2px solid var(--black);padding-top:12px}
+.pack .pack-total .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
+.pack .pack-total .price{font-family:'DM Mono';font-size:26px;font-weight:500}
+.pack .pack-total .fee{font-size:12px;color:var(--muted);margin-top:4px}
+.pack .save-tag{display:inline-block;font-size:11px;font-weight:600;background:var(--ok);color:var(--white);padding:3px 10px;border-radius:999px;margin-top:6px}
+
+/* INFRA */
+.infra-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(26,26,26,.2);border:3px solid var(--black);border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow);margin-top:16px}
+.infra-cell{background:var(--white);padding:20px;color:var(--black)}
+.infra-cell .l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-bottom:8px}
+.infra-cell .v{font-family:'DM Mono';font-size:18px;font-weight:500;color:var(--orange-deep)}
+.infra-cell .d{font-size:12px;color:var(--muted);margin-top:6px}
+
+/* FEE */
+.fee-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(26,26,26,.2);border:3px solid var(--black);border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow);margin-top:16px}
+.fee-cell{background:var(--white);color:var(--black);padding:20px}
+.fee-cell .l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-bottom:8px}
+.fee-cell .v{font-family:'DM Mono';font-size:20px;font-weight:500}
+.fee-cell .d{font-size:12px;color:var(--muted);margin-top:6px}
+
+/* FUERA ALCANCE */
+.out{list-style:none;padding:0}
+.out li{display:flex;gap:12px;padding:12px 0;border-bottom:2px dotted var(--line);font-size:14px;color:var(--white)}
+.out li:last-child{border-bottom:0}
+.out .x{color:var(--black);background:var(--white);font-weight:700;font-size:11px;width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+
+/* PAGO */
+.pago{background:var(--white);border:3px solid var(--black);border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow);margin-top:16px}
+.pago-row{display:flex;gap:16px;padding:14px 20px;border-bottom:1px solid var(--line);align-items:center}
+.pago-row:last-child{border-bottom:0}
+.pago-row .pc{font-family:'DM Mono';color:var(--orange-deep);font-size:20px;font-weight:500;min-width:52px;flex:none}
+.pago-row .pt{font-size:14px;color:var(--black)}
+.pago-row .pt small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+
+/* WARN */
+.warn{border-left:4px solid var(--black);background:rgba(26,26,26,.12);padding:14px 18px;margin:16px 0;font-size:14px;color:var(--white);border-radius:0 8px 8px 0}
+.warn b{color:var(--cream);font-weight:600}
+
+/* BENEFIT */
+.benefit{border-left:4px solid var(--ok);background:#E8F5EE;padding:14px 18px;margin:16px 0;font-size:14px;color:var(--black);border-radius:0 8px 8px 0}
+.benefit b{color:var(--ok);font-weight:600}
+
+footer{padding:44px 0 0;border-top:3px solid rgba(26,26,26,.25);margin-top:52px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+footer .sig{font-family:'Archivo Black';font-size:15px;letter-spacing:.1em;color:var(--cream);opacity:.6}
+footer .fine{margin-left:auto;font-size:12px;color:rgba(255,255,255,.6);text-align:right}
+
+@media(max-width:820px){
+  .hero h1{font-size:32px}
+  h2{font-size:22px}
+  .opts,.packs{grid-template-columns:1fr}
+  .pros-cons{grid-template-columns:1fr}
+  .infra-grid,.fee-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">Propuesta · Mash Hongos Adaptógenos</div>
+    <h1>Un sistema que vende y recuerda <em>por vos</em>.</h1>
+    <p class="lead">Hoy cada venta depende de que estés disponible. Este sistema atiende el primer contacto, recuerda a tus clientes antes de que se queden sin gotero, y te muestra el estado de todo desde un solo lugar — sin que tengas que hacer nada.</p>
+    <div class="meta">
+      <div><span>Para</span><b>Mash Hongos Adaptógenos</b></div>
+      <div><span>Preparada por</span><b>Ailén Sampó</b></div>
+      <div><span>Vigencia</span><b>30 días</b></div>
+    </div>
+  </div>
+
+  <!-- ETAPAS -->
+  <section>
+    <div class="eyebrow">01</div>
+    <h2>El sistema se construye en etapas. Cada una depende de la anterior.</h2>
+
+    <!-- ETAPA 0: NUCLEO -->
+    <div class="etapa" style="margin-top:28px">
+      <div class="etapa-header">
+        <div class="etapa-num">0</div>
+        <div class="etapa-body">
+          <div class="req">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="4" y="0" width="2" height="4" fill="currentColor"/><rect x="4" y="6" width="2" height="4" fill="currentColor"/><rect x="0" y="4" width="4" height="2" fill="currentColor"/><rect x="6" y="4" width="4" height="2" fill="currentColor"/></svg>
+            Base obligatoria de todo
+          </div>
+          <h3>Núcleo — clientes, stock y calendario</h3>
+          <div class="sub">Sin esto, los demás módulos no tienen datos con qué trabajar. El agente no sabe quién escribe. Los recordatorios no saben a quién avisar. El stock no sabe cuándo va a faltar.</div>
+          <ul class="feature-list">
+            <li><span class="dot"></span><span><strong>Clientes y productos:</strong> quién toma qué gotero, desde cuándo, cuánto dura.</span></li>
+            <li><span class="dot"></span><span><strong>Calendario de reposición:</strong> el sistema calcula automáticamente cuándo se le termina a cada cliente.</span></li>
+            <li><span class="dot"></span><span><strong>Stock y producción:</strong> sabe cuándo arrancás un lote y te avisa con tiempo para no quedarte sin stock.</span></li>
+            <li><span class="dot"></span><span><strong>Opt-in:</strong> registro legal de que cada cliente aceptó recibir mensajes. Obligatorio para los recordatorios.</span></li>
+          </ul>
+
+          <div style="margin-top:18px">
+            <p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:none">Dos versiones según presupuesto inicial:</p>
+            <div class="opts">
+              <div class="opt">
+                <span class="opt-badge badge-a">Opción 0A — Entrada</span>
+                <h3>Planilla maestra</h3>
+                <p style="font-size:13px;color:var(--muted);margin-bottom:8px;max-width:none">Excel estructurado con clientes, stock y fechas de reposición calculadas automáticamente. Tiene techo conocido: funciona bien hasta ~80 clientes activos.</p>
+                <div class="pros-cons">
+                  <div class="pros"><p>A favor</p><ul><li>Entrega en días</li><li>El cliente ya sabe usarlo</li><li>Sin costo mensual</li></ul></div>
+                  <div class="cons"><p>Límite</p><ul><li>No conecta con el agente</li><li>Hay que cargar a mano</li><li>Techo en escala</li></ul></div>
+                </div>
+                <div class="opt-price">USD 500</div>
+              </div>
+              <div class="opt rec">
+                <span class="opt-badge badge-rec">Opción 0B — Recomendado</span>
+                <h3>Panel web propio</h3>
+                <p style="font-size:13px;color:var(--muted);margin-bottom:8px;max-width:none">Sistema web con acceso desde el celular. Conectado al agente: cuando entra una venta, el recordatorio se agenda solo. Sin techo de escala.</p>
+                <div class="pros-cons">
+                  <div class="pros"><p>A favor</p><ul><li>Todo conectado</li><li>Desde el celular</li><li>Sin carga manual</li></ul></div>
+                  <div class="cons"><p>Límite</p><ul><li>Requiere cargar ventas en el sistema</li></ul></div>
+                </div>
+                <div class="opt-price">USD 700</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ETAPA 1: AGENTE WA -->
+    <div class="etapa">
+      <div class="dep-chain">
+        <span class="dep-step">Etapa 0</span>
+        <span class="dep-arrow">→</span>
+        <span class="dep-step active">Etapa 1</span>
+      </div>
+      <div class="etapa-header">
+        <div class="etapa-num">1</div>
+        <div class="etapa-body">
+          <h3>Agente WhatsApp — atiende, recuerda, te muestra quién escribe</h3>
+          <div class="sub">Requiere Etapa 0 funcionando. El agente necesita saber quién toma qué para responder con contexto real.</div>
+
+          <div class="opts" style="margin-top:14px">
+            <div class="opt">
+              <span class="opt-badge badge-a">Opción 1A — Meta Business Agent</span>
+              <h3>Agente nativo de WhatsApp</h3>
+              <p style="font-size:13px;color:var(--muted);margin-bottom:8px;max-width:none">Configurado y entrenado en la plataforma de Meta. Sin número separado — usa el que ya tenés. Responde consultas solo. <strong style="color:var(--urgent)">No puede iniciar conversaciones</strong>, así que los recordatorios de recompra no funcionan por este canal.</p>
+              <div class="pros-cons">
+                <div class="pros"><p>A favor</p><ul><li>Sin número nuevo</li><li>Sin costo de API</li><li>Listo rápido</li></ul></div>
+                <div class="cons"><p>Límite crítico</p><ul><li>No manda recordatorios</li><li>No ve ficha del cliente</li><li>Depende de Meta</li></ul></div>
+              </div>
+              <div class="opt-price">USD 350</div>
+            </div>
+            <div class="opt rec">
+              <span class="opt-badge badge-rec">Opción 1B — Agente custom con API</span>
+              <h3>Agente conectado al núcleo</h3>
+              <p style="font-size:13px;color:var(--muted);margin-bottom:8px;max-width:none">Número dedicado al negocio. Cuando escribe Marina, ves que toma Reishi, le quedan 6 días y el recordatorio le sale mañana a las 10:00. Atiende y recuerda — es el módulo con mayor impacto en ventas.</p>
+              <div class="pros-cons">
+                <div class="pros"><p>A favor</p><ul><li>Manda recordatorios</li><li>Ve ficha del cliente</li><li>Conectado al stock</li></ul></div>
+                <div class="cons"><p>Límite</p><ul><li>Número separado</li><li>Costo API ~USD 5–8/mes</li></ul></div>
+              </div>
+              <div class="opt-price">USD 650</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ETAPA 2: RECORDATORIOS -->
+    <div class="etapa">
+      <div class="dep-chain">
+        <span class="dep-step">Etapa 0</span>
+        <span class="dep-arrow">→</span>
+        <span class="dep-step">Etapa 1B</span>
+        <span class="dep-arrow">→</span>
+        <span class="dep-step active">Etapa 2</span>
+      </div>
+      <div class="etapa-header">
+        <div class="etapa-num">2</div>
+        <div class="etapa-body">
+          <h3>Recordatorios de reposición automáticos</h3>
+          <div class="sub">El gotero dura 30 días. Al día 25, a las 10:00, el sistema escribe solo. Vos podés frenar el mensaje antes de esa hora si no corresponde. Requiere Etapa 1B (el agente Meta no puede iniciar conversaciones).</div>
+
+          <div class="opts" style="margin-top:14px">
+            <div class="opt">
+              <span class="opt-badge badge-a">Opción 2A — Por email</span>
+              <h3>Recordatorio por correo</h3>
+              <p style="font-size:13px;color:var(--muted);margin-bottom:8px;max-width:none">Secuencia automática al acercarse la fecha de reposición. Válido si tenés el mail del cliente. Sin restricciones de Meta.</p>
+              <div class="pros-cons">
+                <div class="pros"><p>A favor</p><ul><li>Sin opt-in de Meta</li><li>Costo casi cero</li></ul></div>
+                <div class="cons"><p>Límite</p><ul><li>Menor tasa de lectura</li><li>Requiere email</li></ul></div>
+              </div>
+              <div class="opt-price">USD 200</div>
+            </div>
+            <div class="opt rec">
+              <span class="opt-badge badge-rec">Opción 2B — Por WhatsApp</span>
+              <h3>Recordatorio directo al WhatsApp del cliente</h3>
+              <p style="font-size:13px;color:var(--muted);margin-bottom:8px;max-width:none">El mismo canal que usan todos los días. Tasa de lectura altísima. El opt-in y el template de Meta los configuramos nosotros al implementar.</p>
+              <div class="pros-cons">
+                <div class="pros"><p>A favor</p><ul><li>Canal que ya usan</li><li>Tasa de lectura real</li></ul></div>
+                <div class="pros"><p>Incluido</p><ul><li>Opt-in legal (Etapa 0)</li><li>Template Meta gestionado</li><li>Podés frenar cada envío</li></ul></div>
+              </div>
+              <div class="opt-price">USD 250</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ETAPA 3: LANDING -->
+    <div class="etapa">
+      <div class="dep-chain">
+        <span class="dep-step">Etapa 0</span>
+        <span class="dep-arrow">→</span>
+        <span class="dep-step active">Etapa 3</span>
+        <span style="font-size:12px;color:rgba(255,255,255,.5);padding:0 8px">(paralela a 1 y 2)</span>
+      </div>
+      <div class="etapa-header">
+        <div class="etapa-num">3</div>
+        <div class="etapa-body">
+          <h3>Presencia web — captura el dato de quien te llega por recomendación</h3>
+          <div class="sub">Hoy la gente que llega referida te busca, no te encuentra, o te escribe por Instagram y se pierde. Esta etapa transforma ese tráfico en un contacto que podés volver a activar. Puede construirse en paralelo a las etapas 1 y 2.</div>
+
+          <div class="opts" style="margin-top:14px">
+            <div class="opt">
+              <span class="opt-badge badge-a">Opción 3A — Landing page</span>
+              <h3>Una página</h3>
+              <p style="font-size:13px;color:var(--muted);margin-bottom:8px;max-width:none">Productos, beneficios, testimonios y botón directo a WhatsApp. Su trabajo es capturar el teléfono o email. Sin carrito.</p>
+              <div class="opt-price">USD 450</div>
+            </div>
+            <div class="opt">
+              <span class="opt-badge badge-a">Opción 3B — Web completa</span>
+              <h3>Home + productos + contacto</h3>
+              <p style="font-size:13px;color:var(--muted);margin-bottom:8px;max-width:none">Varias páginas, conectada al panel para mostrar stock real. Más contenido, más posicionamiento. Sin carrito.</p>
+              <div class="opt-price">USD 750</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ETAPA 4: INSTAGRAM -->
+    <div class="etapa">
+      <div class="dep-chain">
+        <span class="dep-step">Etapa 1B</span>
+        <span class="dep-arrow">→</span>
+        <span class="dep-step active">Etapa 4</span>
+      </div>
+      <div class="etapa-header">
+        <div class="etapa-num">4</div>
+        <div class="etapa-body">
+          <h3>Agente Instagram — responde DMs desde el mismo cerebro</h3>
+          <div class="sub">Mismo agente, mismo conocimiento del catálogo, nuevo canal. Cuando alguien te escribe por Instagram, el sistema responde igual que por WhatsApp. Requiere Etapa 1B — el agente ya existe, esto es una superficie adicional. No tiene recordatorios proactivos (limitación de Instagram, no del sistema).</div>
+          <div class="opt-price" style="margin-top:14px">USD 300</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- PACKS -->
+  <section>
+    <div class="eyebrow">02</div>
+    <h2>Tres formas de entrar. Una que aprovecha mejor la inversión.</h2>
+    <p class="dim">Al comprometerte con el proyecto completo desde esta propuesta — incluso pagando etapa por etapa — mantenés los precios de pack. Los módulos sumados por su cuenta más adelante tienen un costo adicional de integración. Según tu consulta inicial, WhatsApp e Instagram son los canales principales.</p>
+
+    <div class="packs">
+      <div class="pack">
+        <div class="pack-label" style="color:var(--muted)">Pack Entrada</div>
+        <h3>Lo mínimo que funciona</h3>
+        <ul class="items">
+          <li>Núcleo planilla (0A)</li>
+          <li>Agente Meta WhatsApp (1A)</li>
+          <li>Recordatorios email (2A)</li>
+          <li>Landing page (3A)</li>
+        </ul>
+        <div class="pack-total">
+          <div class="label">Proyecto completo</div>
+          <div class="price" style="color:var(--black)">USD 1.500</div>
+          <div class="fee">Fee: USD 60/mes</div>
+          <div class="save-tag" style="background:var(--muted)">Suma suelta: USD 1.800</div>
+        </div>
+      </div>
+
+      <div class="pack rec">
+        <div class="pack-label" style="color:var(--ok);font-weight:700">Pack Recomendado</div>
+        <h3>WA + IG con mayor impacto</h3>
+        <ul class="items">
+          <li>Núcleo panel web (0B)</li>
+          <li>Agente custom WA API (1B)</li>
+          <li>Recordatorios WhatsApp (2B)</li>
+          <li>Agente Instagram (4)</li>
+          <li>Landing page (3A)</li>
+        </ul>
+        <div class="pack-total">
+          <div class="label">Proyecto completo</div>
+          <div class="price" style="color:var(--ok)">USD 2.200</div>
+          <div class="fee">Fee: USD 150/mes</div>
+          <div class="save-tag">Suma suelta: USD 2.580</div>
+        </div>
+      </div>
+
+      <div class="pack">
+        <div class="pack-label" style="color:var(--orange-deep)">Pack Completo</div>
+        <h3>Todo — WA, IG, web, panel</h3>
+        <ul class="items">
+          <li>Núcleo panel web (0B)</li>
+          <li>Agente custom WA API (1B)</li>
+          <li>Recordatorios WhatsApp (2B)</li>
+          <li>Agente Instagram (4)</li>
+          <li>Web completa (3B)</li>
+        </ul>
+        <div class="pack-total">
+          <div class="label">Proyecto completo</div>
+          <div class="price" style="color:var(--orange-deep)">USD 2.500</div>
+          <div class="fee">Fee: USD 150/mes</div>
+          <div class="save-tag" style="background:var(--orange-deep)">Suma suelta: USD 3.060</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- DESGLOSE PACK RECOMENDADO -->
+  <section>
+    <div class="eyebrow">03</div>
+    <h2>Qué incluye el Pack Recomendado — desglosado</h2>
+
+    <div class="total-table">
+      <div class="row"><span style="font-weight:600;color:var(--black)">Etapa 0B — Núcleo panel web</span><span class="mono">USD 700</span></div>
+      <div class="row sub"><span>Clientes, stock, calendario, opt-in</span><span class="mono">incluido</span></div>
+      <div class="row"><span style="font-weight:600;color:var(--black)">Etapa 1B — Agente WhatsApp custom</span><span class="mono">USD 650</span></div>
+      <div class="row sub"><span>Responde consultas + ficha de cliente en tiempo real</span><span class="mono">incluido</span></div>
+      <div class="row"><span style="font-weight:600;color:var(--black)">Etapa 2B — Recordatorios por WhatsApp</span><span class="mono">USD 250</span></div>
+      <div class="row sub"><span>Sale al día 25 a las 10:00. Podés frenarlo antes</span><span class="mono">incluido</span></div>
+      <div class="row"><span style="font-weight:600;color:var(--black)">Etapa 4 — Agente Instagram</span><span class="mono">USD 300</span></div>
+      <div class="row sub"><span>Responde DMs con el mismo cerebro que WhatsApp</span><span class="mono">incluido</span></div>
+      <div class="row"><span style="font-weight:600;color:var(--black)">Etapa 3A — Landing page</span><span class="mono">USD 450</span></div>
+      <div class="row sub"><span>Captura teléfono y mail de quien llega por recomendación</span><span class="mono">incluido</span></div>
+      <div class="row highlight"><span>Suma de módulos sueltos</span><span class="mono">USD 2.350</span></div>
+      <div class="row saving"><span>Descuento proyecto completo</span><span class="mono" style="color:var(--ok)">− USD 150</span></div>
+      <div class="row big"><span>Proyecto completo</span><span class="mono">USD 2.200</span></div>
+    </div>
+  </section>
+
+  <!-- INFRAESTRUCTURA -->
+  <section>
+    <div class="eyebrow">04</div>
+    <h2>Qué pagás por mes — y por qué</h2>
+    <p class="dim">La infraestructura está incluida en el fee. No hay sorpresas de facturación externa.</p>
+
+    <div class="infra-grid">
+      <div class="infra-cell">
+        <div class="l">n8n Cloud</div>
+        <div class="v">USD 24/mes</div>
+        <div class="d">Motor de automatización. Orquesta todo el sistema.</div>
+      </div>
+      <div class="infra-cell">
+        <div class="l">WhatsApp Cloud API</div>
+        <div class="v">USD 5–8/mes</div>
+        <div class="d">A 100 conversaciones/mes. Mensajes del agente y recordatorios.</div>
+      </div>
+      <div class="infra-cell">
+        <div class="l">IA + hosting</div>
+        <div class="v">USD 2–8/mes</div>
+        <div class="d">Tokens del agente + servidor del panel (Vercel/Neon).</div>
+      </div>
+    </div>
+
+    <div class="fee-grid" style="margin-top:3px">
+      <div class="fee-cell">
+        <div class="l">Base</div>
+        <div class="v">USD 90/mes</div>
+        <div class="d">Infraestructura, monitoreo, backups y 1hs de soporte incluida.</div>
+      </div>
+      <div class="fee-cell">
+        <div class="l">Por canal activo</div>
+        <div class="v">USD 30/canal</div>
+        <div class="d">WhatsApp = 1 canal. Instagram cuando se active = 2 canales.</div>
+      </div>
+      <div class="fee-cell" style="background:#E8F5EE">
+        <div class="l">Fee Pack Recomendado</div>
+        <div class="v" style="color:var(--ok)">USD 150/mes</div>
+        <div class="d">WhatsApp + Instagram. Todo incluido. Sin facturas extra.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUERA ALCANCE -->
+  <section>
+    <div class="eyebrow">05</div>
+    <h2>Fuera de alcance</h2>
+    <ul class="out">
+      <li><span class="x">✕</span><span><strong>El sistema no asesora.</strong> No recomienda qué tomar ni en qué dosis. Pregunta el objetivo, presenta los productos del negocio que aplican, y deriva al asesor cuando el cliente quiere profundizar. El asesoramiento lo hacés vos, siempre.</span></li>
+      <li><span class="x">✕</span><span><strong>Textos comerciales y copy del agente.</strong> Las respuestas, el tono y las descripciones de productos las provee Mash. El sistema las usa, no las inventa.</span></li>
+      <li><span class="x">✕</span><span><strong>Diseño gráfico e identidad de marca.</strong> La interfaz del sistema está incluida. El logo, paleta y fotografías de producto, no.</span></li>
+      <li><span class="x">✕</span><span><strong>Migración de datos históricos.</strong> Si hay clientes en papel o en chats de WhatsApp que cargar al sistema, se cotiza aparte (aprox. USD 150).</span></li>
+      <li><span class="x">✕</span><span><strong>Integración con Mercado Pago o carrito de compras.</strong> El sistema lleva a la venta — el cobro lo hacés vos. Si más adelante querés cobrar online, se cotiza como Fase 2.</span></li>
+      <li><span class="x">✕</span><span><strong>Soporte posterior a la entrega.</strong> Incluido en el fee mensual. Sin fee activo, no hay soporte.</span></li>
+    </ul>
+  </section>
+
+  <!-- FORMA DE PAGO -->
+  <section>
+    <div class="eyebrow">06</div>
+    <h2>Forma de pago</h2>
+    <p class="dim">Se firma el proyecto completo y se paga contra la entrega de cada etapa. No pagás nada que no hayas visto funcionar.</p>
+    <div class="pago">
+      <div class="pago-row">
+        <span class="pc">30%</span>
+        <span class="pt">A la firma.<small>Arranca el núcleo (panel + datos).</small></span>
+      </div>
+      <div class="pago-row">
+        <span class="pc">35%</span>
+        <span class="pt">Contra entrega del núcleo y el agente de WhatsApp funcionando.<small>Podés ver el sistema en vivo antes de seguir pagando.</small></span>
+      </div>
+      <div class="pago-row">
+        <span class="pc">35%</span>
+        <span class="pt">Contra entrega de la landing y el sistema en producción completo.<small>El fee mensual arranca el mes siguiente.</small></span>
+      </div>
+    </div>
+    <div class="benefit" style="margin-top:16px"><b>Al cerrar el proyecto completo con esta propuesta, cada etapa mantiene el precio de pack.</b> Podés pagarla en el momento que te convenga — el beneficio queda reservado mientras la propuesta esté vigente.</div>
+  </section>
+
+  <footer>
+    <div class="sig">Ailén Sampó</div>
+    <div class="fine">Arquitectura de Sistemas Digitales · Esta propuesta tiene vigencia de 30 días.</div>
+  </footer>
+
+</div>
+</body>
+</html>
