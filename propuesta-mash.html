@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta — Mash · Ailén Sampó</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum-deep:#2A1449;
+  --soft-lilac:#E1ADFF;
+  --orchid-pink:#F050C8;
+  --citruz-blaze:#FF5733;
+  --sunny-yellow:#FFE45C;
+  --seafoam:#8EEECB;
+  --ink:#0E0E1A;
+  --paper:#F2F0F8;
+  --line:rgba(225,173,255,.12);
+  --line-strong:rgba(225,173,255,.3);
+  --muted:rgba(242,240,248,.44);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--paper);font-family:'Tajawal',sans-serif;font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px 100px}
+.eyebrow{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.25em;color:var(--soft-lilac);opacity:.5}
+.mono{font-family:'DM Mono',monospace;font-variant-numeric:tabular-nums}
+
+/* HERO */
+.hero{padding:88px 0 56px}
+.hero h1{font-family:'Funnel Display';font-size:49px;font-weight:500;letter-spacing:-.025em;line-height:1.04;margin:20px 0 22px;max-width:17ch}
+.hero h1 em{font-style:normal;color:var(--orchid-pink)}
+.hero .lead{font-size:17px;opacity:.65;max-width:56ch}
+.meta{display:flex;gap:28px;margin-top:36px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.meta b{display:block;color:var(--paper);font-weight:400;font-size:14px;margin-top:2px;font-family:'DM Mono',monospace}
+
+section{padding:52px 0;border-top:1px solid var(--line)}
+h2{font-family:'Funnel Display';font-size:31px;font-weight:500;letter-spacing:-.02em;margin:8px 0 18px}
+h3{font-family:'Funnel Display';font-size:20px;font-weight:500;letter-spacing:-.02em}
+p{margin-bottom:14px;max-width:64ch}
+p.dim{color:var(--muted);font-size:14px}
+strong{font-weight:500;color:var(--sunny-yellow)}
+
+/* DIAGNOSTICO */
+.diag{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+.diag div{background:var(--plum-deep);padding:22px 20px}
+.diag .n{font-family:'DM Mono',monospace;font-size:31px;color:var(--citruz-blaze);line-height:1}
+.diag .t{font-size:13px;color:var(--muted);margin-top:10px}
+
+/* NUCLEO */
+.nucleo{border:1px solid var(--orchid-pink);background:rgba(240,80,200,.05);padding:30px;margin-top:20px}
+.nucleo .badge{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--orchid-pink);border:1px solid rgba(240,80,200,.5);padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.nucleo .price{font-family:'DM Mono',monospace;font-size:31px;color:var(--paper);margin-top:18px}
+.nucleo .price small{font-size:12px;color:var(--muted);display:block;font-family:'Tajawal';margin-top:4px}
+
+/* BLOQUES */
+.blk{border:1px solid var(--line);background:var(--plum-deep);padding:26px;margin-top:16px}
+.blk-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.blk-h .p{margin-left:auto;font-family:'DM Mono',monospace;font-size:25px;white-space:nowrap}
+.fx{margin:16px 0 0;padding-left:0;list-style:none}
+.fx li{display:flex;gap:12px;padding:9px 0;border-top:1px solid rgba(225,173,255,.07);font-size:14px}
+.fx li:first-child{border-top:0}
+.fx .k{color:var(--seafoam);font-weight:500;min-width:120px;flex:none}
+.px{width:9px;height:9px;flex:none;image-rendering:pixelated;margin-top:6px}
+
+/* TABLA COMPARATIVA */
+table{width:100%;border-collapse:collapse;margin-top:20px;font-size:14px}
+th{text-align:left;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);padding:0 14px 12px;border-bottom:1px solid var(--line)}
+td{padding:13px 14px;border-bottom:1px solid rgba(225,173,255,.06)}
+td.c{text-align:center;font-family:'DM Mono',monospace}
+.si{color:var(--seafoam)}
+.no{color:var(--citruz-blaze)}
+tr.key{background:rgba(255,228,92,.05)}
+tr.key td{color:var(--sunny-yellow);font-weight:500}
+
+/* PRECIO FINAL */
+.total{border:1px solid var(--line-strong);background:var(--plum-deep);padding:32px;margin-top:24px}
+.total .rows div{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(225,173,255,.07);font-size:15px}
+.total .rows div:last-child{border-bottom:0}
+.total .rows .mono{color:var(--paper)}
+.total .big{display:flex;justify-content:space-between;align-items:baseline;margin-top:22px;padding-top:22px;border-top:1px solid var(--line-strong)}
+.total .big span{font-family:'Funnel Display';font-size:20px;font-weight:500}
+.total .big b{font-family:'DM Mono',monospace;font-size:39px;font-weight:400;color:var(--sunny-yellow)}
+
+.alt{border:1px dashed var(--line-strong);padding:22px;margin-top:16px}
+.alt h3{font-size:16px;margin-bottom:8px}
+
+.fee{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:20px}
+.fee div{background:var(--plum-deep);padding:22px 20px}
+.fee .l{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-bottom:10px}
+.fee .v{font-family:'DM Mono',monospace;font-size:20px;color:var(--seafoam)}
+.fee .d{font-size:13px;color:var(--muted);margin-top:8px}
+
+.out li{padding:10px 0;border-bottom:1px solid rgba(225,173,255,.07);font-size:14px;list-style:none;display:flex;gap:12px}
+.out li:last-child{border-bottom:0}
+.out .x{color:var(--citruz-blaze);flex:none}
+
+.pago div{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(225,173,255,.07);font-size:14px}
+.pago div:last-child{border-bottom:0}
+.pago .pc{font-family:'DM Mono',monospace;color:var(--sunny-yellow);min-width:52px;flex:none}
+
+.warn{border-left:2px solid var(--citruz-blaze);padding:14px 0 14px 18px;margin:20px 0;font-size:14px;color:var(--paper)}
+.warn b{color:var(--citruz-blaze);font-weight:500}
+
+footer{padding:44px 0 0;border-top:1px solid var(--line);margin-top:52px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+footer .sig{font-family:'Funnel Display';font-size:16px;letter-spacing:.3em;color:var(--soft-lilac);opacity:.5}
+footer .v{margin-left:auto;font-size:12px;color:var(--muted);text-align:right}
+
+@media(max-width:820px){
+  .hero h1{font-size:31px}
+  h2{font-size:25px}
+  .diag,.fee{grid-template-columns:1fr}
+  .blk-h .p{margin-left:0;width:100%}
+  .hide-sm{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Propuesta · Mash × Ailén Sampó</div>
+    <h1>Un sistema que sabe <em>cuándo</em> te van a comprar.</h1>
+    <p class="lead">Tus clientes no compran una vez: compran todos los meses. Ese ciclo es predecible, y hoy vive en tu cabeza. Esta propuesta lo convierte en un sistema que avisa solo — a ellos y a vos.</p>
+    <div class="meta">
+      <div>Cliente<b>Mash · Joaquín</b></div>
+      <div>Fecha<b>13/07/2026</b></div>
+      <div>Vigencia<b>30 días</b></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="eyebrow">01</div>
+    <h2>Dónde estás hoy</h2>
+    <p>Vendés unos 80 goteros por mes, casi todo a clientes que vuelven. El gotero dura 30 días. Sabés que Marina va a volver — pero no sabés exactamente cuándo, y si no la escribís a tiempo, ese mes no compra. La producción tarda hasta 3 semanas por lote, así que cuando notás que falta stock, ya es tarde.</p>
+    <div class="diag">
+      <div><div class="n">0</div><div class="t">recordatorios automáticos. Cada recompra depende de que te acuerdes.</div></div>
+      <div><div class="n">1</div><div class="t">Excel que no habla con nada. El stock lo mirás cuando te acordás.</div></div>
+      <div><div class="n">∞</div><div class="t">consultas por WhatsApp sin contexto. Cada una arranca de cero.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">02</div>
+    <h2>Lo que hace el sistema</h2>
+    <p>No es un bot, ni una planilla mejor. Es <strong>un solo cerebro</strong> que conoce a cada cliente, sabe qué toma y cuándo se le termina — y desde ahí hace tres cosas al mismo tiempo: le escribe al cliente antes de que se quede sin producto, te avisa a vos con tiempo suficiente para producir, y te muestra quién es cada persona que te escribe.</p>
+
+    <div class="nucleo">
+      <span class="badge">Núcleo — base de todo</span>
+      <h3>El motor</h3>
+      <p class="dim" style="margin-top:10px">Clientes, productos, stock, fechas de compra y las reglas que las conectan. Panel web propio.</p>
+      <ul class="fx">
+        <li><span class="k">Clientes</span><span>Quién es, qué toma, cuándo compró, cuándo se le termina.</span></li>
+        <li><span class="k">Stock</span><span>Lo tuyo y lo de ellos, en el mismo reloj.</span></li>
+        <li><span class="k">Producción</span><span>Te dice la fecha en que tenés que arrancar cada lote para no faltar. Cada lote tarda 21 días (14 en Ashwagandha). No un "stock bajo": una fecha.</span></li>
+        <li><span class="k">Reglas</span><span>El aviso sale al día 25, a las 10:00. Vos podés frenarlo antes de esa hora.</span></li>
+      </ul>
+      <div class="price">USD 1.400<small>El núcleo no se contrata por separado: sin él, todo lo demás es un chatbot cualquiera.</small></div>
+    </div>
+
+    <div class="blk">
+      <div class="blk-h">
+        <h3>WhatsApp — atiende, escribe primero, y te muestra a quién</h3>
+        <span class="p" style="color:var(--sunny-yellow)">USD 1.300</span>
+      </div>
+      <p class="dim">Una sola conexión que hace tres trabajos. Es el canal donde ya vendés.</p>
+      <ul class="fx">
+        <li><svg class="px" viewBox="0 0 8 8" fill="var(--seafoam)" shape-rendering="crispEdges"><rect x="0" y="4" width="2" height="2"/><rect x="2" y="6" width="2" height="2"/><rect x="4" y="4" width="2" height="2"/><rect x="6" y="2" width="2" height="2"/></svg><span><b style="color:var(--seafoam);font-weight:500">Atiende.</b> Responde el primer contacto, entiende qué busca la persona y te la deriva con el contexto listo.</span></li>
+        <li><svg class="px" viewBox="0 0 8 8" fill="var(--seafoam)" shape-rendering="crispEdges"><rect x="0" y="4" width="2" height="2"/><rect x="2" y="6" width="2" height="2"/><rect x="4" y="4" width="2" height="2"/><rect x="6" y="2" width="2" height="2"/></svg><span><b style="color:var(--seafoam);font-weight:500">Escribe primero.</b> El recordatorio de recompra sale solo al día 25, a las 10:00. Es el módulo que te hace ganar plata.</span></li>
+        <li><svg class="px" viewBox="0 0 8 8" fill="var(--seafoam)" shape-rendering="crispEdges"><rect x="0" y="4" width="2" height="2"/><rect x="2" y="6" width="2" height="2"/><rect x="4" y="4" width="2" height="2"/><rect x="6" y="2" width="2" height="2"/></svg><span><b style="color:var(--seafoam);font-weight:500">Te muestra a quién.</b> Cuando te escribe Marina, ves al costado que toma Reishi, le quedan 6 días de gotero y que el recordatorio le sale mañana a las 10:00. Contestás vos — pero sabiendo.</span></li>
+      </ul>
+    </div>
+
+    <div class="blk">
+      <div class="blk-h">
+        <h3>Landing — captura el dato</h3>
+        <span class="p" style="color:var(--sunny-yellow)">USD 600</span>
+      </div>
+      <p class="dim">Una sola página. Su trabajo no es ser folleto: es tomarle el teléfono y el mail a la gente que hoy te llega por recomendación y se pierde. Sin esto, no hay lista a la que escribirle mañana.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">03</div>
+    <h2>Las dos formas de conectar WhatsApp</h2>
+    <p>Hay dos caminos, y no son equivalentes. Te los muestro completos.</p>
+    <table>
+      <thead><tr><th></th><th class="c">Agente Meta</th><th class="c">Conexión completa</th></tr></thead>
+      <tbody>
+        <tr><td>Costo de la conexión</td><td class="c si">Gratis</td><td class="c">Por conversación</td></tr>
+        <tr><td>Tu número de siempre</td><td class="c si">Lo conservás</td><td class="c no">Número aparte</td></tr>
+        <tr><td>Seguís usando la app de WhatsApp</td><td class="c si">Sí</td><td class="c no">Pasás a un panel</td></tr>
+        <tr><td>Responde consultas solo</td><td class="c si">Sí</td><td class="c si">Sí</td></tr>
+        <tr class="key"><td>Manda el recordatorio de recompra</td><td class="c no">No puede</td><td class="c si">Sí</td></tr>
+        <tr class="key"><td>Ve la ficha del cliente al escribirte</td><td class="c no">No</td><td class="c si">Sí</td></tr>
+      </tbody>
+    </table>
+    <div class="warn">
+      <b>Lo importante:</b> el agente de Meta solo <b>responde</b>. Nunca puede iniciar una conversación. El recordatorio de recompra es, por definición, un mensaje que sale primero — así que con esa opción, el corazón del sistema no funciona por WhatsApp.
+    </div>
+    <div class="alt">
+      <h3>Si querés empezar más liviano</h3>
+      <p class="dim" style="margin:0">Podemos configurar el agente de Meta ahora (<span class="mono" style="color:var(--sunny-yellow)">USD 550</span>) para que atienda el primer contacto desde ya, sin tocar tu número. Es un escalón, no un destino: cuando quieras los recordatorios, se migra a la conexión completa. La migración posterior cuesta <span class="mono">USD 1.560</span> (el módulo + 20% de integración diferida). Contratado junto con todo, ese recargo no existe.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">04</div>
+    <h2>Inversión</h2>
+    <div class="total">
+      <div class="rows">
+        <div><span>Núcleo — el motor</span><span class="mono">USD 1.400</span></div>
+        <div><span>WhatsApp — atiende, recuerda, muestra</span><span class="mono">USD 1.300</span></div>
+        <div><span>Landing — captura el dato</span><span class="mono">USD 600</span></div>
+      </div>
+      <div class="big"><span>Proyecto completo</span><b>USD 3.300</b></div>
+    </div>
+
+    <div class="alt">
+      <h3>Versión más económica del núcleo</h3>
+      <p class="dim" style="margin:0">El motor puede vivir sobre una planilla maestra en vez de un panel web propio: <span class="mono" style="color:var(--sunny-yellow)">USD 650</span> en lugar de 1.400. Total del proyecto: <span class="mono">USD 2.550</span>.<br><br>Es más barato y funciona igual — pero tiene techo conocido: por encima de ~80 clientes activos, o el día que quieras consultar datos en vivo desde WhatsApp, hay que migrar al panel. Esa migración después cuesta <span class="mono">USD 1.680</span>. Es un préstamo, no un destino. Te lo digo ahora para que elijas sabiendo.</p>
+    </div>
+
+    <p class="dim" style="margin-top:22px">Cualquier módulo contratado por separado más adelante lleva un <strong>+20% de integración diferida</strong>: retomar un sistema construido meses antes, migrar datos y volver a probarlo cuesta horas reales. Contratado todo junto, ese recargo no existe.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">05</div>
+    <h2>Operación mensual</h2>
+    <p>El sistema no se entrega y se abandona. Los agentes se degradan: Meta cambia sus reglas, aparecen conversaciones que nadie previó, el negocio cambia. El fee es lo que mantiene el sistema vivo y aprendiendo.</p>
+    <div class="fee">
+      <div><div class="l">Base</div><div class="v">USD 90 / mes</div><div class="d">Funcionamiento, backups, monitoreo y ajustes menores.</div></div>
+      <div><div class="l">Canal activo</div><div class="v">USD 40 / mes</div><div class="d">Por cada canal vivo. Mantenimiento del agente y sus respuestas.</div></div>
+      <div><div class="l">Consumo</div><div class="v">Según uso</div><div class="d">Mensajes de WhatsApp e inteligencia artificial. Se factura con el uso real.</div></div>
+    </div>
+    <p class="dim" style="margin-top:18px">El fee es la condición para que el sistema siga operando y siendo mantenido. Si en algún momento no querés continuarlo, se te entrega todo el sistema y termina el acompañamiento — pero es una decisión que tomás vos, explícitamente.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">06</div>
+    <h2>Fuera de alcance</h2>
+    <ul class="out">
+      <li><span class="x">✕</span><span><b style="font-weight:500">El sistema no asesora.</b> No recomienda qué tomar ni en qué dosis. Eso es asesoramiento de salud y lo hacés vos, siempre. El sistema pregunta, ordena, cuenta y avisa.</span></li>
+      <li><span class="x">✕</span><span><b style="font-weight:500">Contenido y textos comerciales.</b> Los provee Mash.</span></li>
+      <li><span class="x">✕</span><span><b style="font-weight:500">Diseño gráfico e identidad de marca.</b> La interfaz del sistema está incluida; el logo, la paleta y la identidad de Mash, no.</span></li>
+      <li><span class="x">✕</span><span><b style="font-weight:500">Migración de datos históricos.</b> Se cotiza aparte si hace falta.</span></li>
+      <li><span class="x">✕</span><span><b style="font-weight:500">Soporte posterior a la entrega.</b> Va incluido en el fee mensual.</span></li>
+    </ul>
+    <p class="dim" style="margin-top:20px">Fase 2, cotizable más adelante: recordatorios por mail (recién tienen sentido cuando la landing haya juntado una lista), Instagram como canal, y cobros por Mercado Pago.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">07</div>
+    <h2>Forma de pago</h2>
+    <p>Se contrata el proyecto completo y se paga contra entrega de cada etapa.</p>
+    <div class="pago">
+      <div><span class="pc">30%</span><span>A la firma. Arranca el núcleo.</span></div>
+      <div><span class="pc">35%</span><span>Contra entrega del núcleo y WhatsApp funcionando.</span></div>
+      <div><span class="pc">35%</span><span>Contra entrega de la landing y el sistema en producción.</span></div>
+    </div>
+    <p class="dim" style="margin-top:18px">El fee mensual arranca el mes siguiente a la puesta en producción.</p>
+  </section>
+
+  <footer>
+    <div class="sig">s (a) ó</div>
+    <div class="v">Ailén Sampó · Arquitectura de Sistemas Digitales<br>Esta propuesta tiene una vigencia de 30 días.</div>
+  </footer>
+
+</div>
+</body>
+</html>
